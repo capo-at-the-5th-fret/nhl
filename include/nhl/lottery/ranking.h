@@ -239,9 +239,11 @@ namespace nhl::lottery
         return ret;
     }();
     static_assert(rankings.size() == rankings_count);
+#if __cpp_lib_ranges
     static_assert(std::ranges::is_sorted(rankings));
     static_assert(std::ranges::adjacent_find(rankings) ==
         std::ranges::end(rankings));
+#endif
 }
 
 #if 0

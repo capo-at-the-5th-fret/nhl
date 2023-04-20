@@ -16,9 +16,11 @@ namespace nhl::text_literals
         "west"sv
     };
     static_assert(conference_ids.size() == 2);
+#if __cpp_lib_ranges
     static_assert(std::ranges::is_sorted(conference_ids));
     static_assert(std::ranges::adjacent_find(conference_ids) ==
         std::ranges::end(conference_ids));
+#endif
 
     inline constexpr std::array conference_names =
     {
@@ -26,9 +28,11 @@ namespace nhl::text_literals
         "Western"sv
     };
     static_assert(conference_ids.size() == 2);
+#if __cpp_lib_ranges
     static_assert(std::ranges::is_sorted(conference_names));
     static_assert(std::ranges::adjacent_find(conference_names) ==
         std::ranges::end(conference_names));
+#endif
 
     inline constexpr std::array team_ids
     {
@@ -66,9 +70,11 @@ namespace nhl::text_literals
         "WSH"sv
     };
     static_assert(team_ids.size() == 32);
+#if __cpp_lib_ranges
     static_assert(std::ranges::is_sorted(team_ids));
     static_assert(std::ranges::adjacent_find(team_ids) ==
         std::ranges::end(team_ids));
+#endif
 
     inline constexpr std::array team_names
     {
@@ -105,10 +111,13 @@ namespace nhl::text_literals
         "Winnipeg Jets"sv,
         "Washington Capitals"sv
     };
-    static_assert(std::ranges::size(team_names) == 32);
+    static_assert(team_names.size() == 32);
+
+#if __cpp_lib_ranges
     static_assert(std::ranges::adjacent_find(team_names) ==
         std::ranges::end(team_names));
     //static_assert(std::ranges::is_sorted(team_names));
+#endif
 
     inline constexpr std::array division_ids
     {
@@ -117,10 +126,12 @@ namespace nhl::text_literals
         "MET"sv,
         "PAC"sv
     };
-    static_assert(std::ranges::size(division_ids) == 4);
+    static_assert(division_ids.size() == 4);
+#if __cpp_lib_ranges
     static_assert(std::ranges::adjacent_find(division_ids) ==
         std::ranges::end(division_ids));
     static_assert(std::ranges::is_sorted(division_ids));
+#endif
 
     inline constexpr std::array division_names
     {
@@ -129,8 +140,10 @@ namespace nhl::text_literals
         "Metropolitan"sv,
         "Pacific"sv
     };
-    static_assert(std::ranges::size(division_names) == 4);
+    static_assert(division_names.size() == 4);
+#if __cpp_lib_ranges
     static_assert(std::ranges::adjacent_find(division_names) ==
         std::ranges::end(division_names));
     static_assert(std::ranges::is_sorted(division_names));
+#endif
 }

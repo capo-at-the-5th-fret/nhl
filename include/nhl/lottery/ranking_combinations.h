@@ -3,6 +3,7 @@
 #include <array>
 #include <algorithm>
 #include <random>
+#include <version>
 #include "nhl/lottery/lottery.h"
 
 namespace nhl::lottery
@@ -33,6 +34,7 @@ namespace nhl::lottery
         ranking_combinations{ 16, 5 }
     };
     static_assert(combinations_per_ranking.size() == rankings_count);
+#if __cpp_lib_ranges
     static_assert(std::ranges::is_sorted(combinations_per_ranking, {},
         &ranking_combinations::ranking));
     static_assert(std::ranges::adjacent_find(combinations_per_ranking, {},
@@ -44,6 +46,7 @@ namespace nhl::lottery
             return (... + combinations_per_ranking[I].combinations);
         }(std::make_index_sequence<rankings_count>{}) == combinations_used_count
     );
+#endif
 
     inline constexpr std::size_t combinations_for_ranking(int ranking)
     {

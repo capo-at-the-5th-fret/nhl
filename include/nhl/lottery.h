@@ -43,16 +43,18 @@ namespace nhl
         // redraw
         ranking_odds{ 17, 0.1 }
     };
-    static_assert(std::ranges::size(lottery_odds) == 17);
+    static_assert(lottery_odds.size() == 17);
+#if __cpp_lib_ranges
     static_assert(std::ranges::is_sorted(lottery_odds, {}, &ranking_odds::rank));
+#endif
 
     double get_ranking_odds(int ranking)
     {
-        if (auto pos = std::ranges::find(lottery_odds, ranking, &ranking_odds::rank);
-            pos != std::ranges::end(lottery_odds))
-            {
-                return pos->odds;
-            }
+        if (auto pos = std::ranges::find(lottery_odds, ranking,
+            &ranking_odds::rank); pos != std::ranges::end(lottery_odds))
+        {
+            return pos->odds;
+        }
 
         return 0;
     }
