@@ -3,7 +3,7 @@
 #include <concepts>
 #include <compare>
 #include <iostream>
-#include <format>
+#include <fmt/format.h>
 
 namespace math
 {
@@ -93,10 +93,10 @@ namespace math
 }
 
 template <std::floating_point T>
-struct std::formatter<math::percentage_t<T>> :
-    std::formatter<typename math::percentage_t<T>::weak_type>
+struct fmt::formatter<math::percentage_t<T>> :
+    fmt::formatter<typename math::percentage_t<T>::weak_type>
 {
-    auto format(math::percentage_t<T> const& pct, std::format_context& ctx)
+    auto format(math::percentage_t<T> const& pct, fmt::format_context& ctx)
     {
         return formatter<typename math::percentage_t<T>::weak_type>::format(
             static_cast<typename math::percentage_t<T>::weak_type>(pct), ctx);

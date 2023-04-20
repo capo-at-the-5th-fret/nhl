@@ -3,7 +3,7 @@
 
 #include <array>
 #include <algorithm>
-#include <format>
+#include <fmt/format.h>
 #include "nhl/lottery/lottery.h"
 #include "nhl/lottery/ball.h"
 #include "nhl/lottery/combination_value.h"
@@ -107,10 +107,10 @@ namespace nhl::lottery
 }
 
 template <>
-struct std::formatter<nhl::lottery::combination> :
-    std::formatter<nhl::lottery::combination_value>
+struct fmt::formatter<nhl::lottery::combination> :
+    fmt::formatter<nhl::lottery::combination_value>
 {
-    auto format(nhl::lottery::combination const& c, std::format_context& ctx)
+    auto format(nhl::lottery::combination const& c, fmt::format_context& ctx)
     {
         return formatter<nhl::lottery::combination_value>::format(
             to_value(c), ctx);

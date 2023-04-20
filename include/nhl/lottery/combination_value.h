@@ -4,7 +4,7 @@
 #include <compare>
 #include <iostream>
 #include <functional>
-#include <format>
+#include <fmt/format.h>
 #include "nhl/math/cmath.h"
 #include "nhl/lottery/lottery.h"
 
@@ -106,14 +106,14 @@ namespace nhl::lottery
 }
 
 template <>
-struct std::formatter<nhl::lottery::combination_value> :
-    std::formatter<std::string>
+struct fmt::formatter<nhl::lottery::combination_value> :
+    fmt::formatter<std::string>
 {
     auto format(nhl::lottery::combination_value const& cv,
-        std::format_context& ctx)
+        fmt::format_context& ctx)
     {
-        return formatter<string>::format(
-            std::format("{} {} {} {}",
+        return formatter<std::string>::format(
+            fmt::format("{} {} {} {}",
                 cv.one(),
                 cv.two(),
                 cv.three(),

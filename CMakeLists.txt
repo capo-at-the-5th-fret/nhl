@@ -5,6 +5,25 @@ project(nhl
     LANGUAGES CXX
 )
 
+# Tags: https://github.com/fmtlib/fmt/tags
+# Linkage: target_link_libraries(fmt::fmt)
+set(NEEDED_fmt_VERSION "9.1.0")
+
+find_package(fmt ${NEEDED_fmt_VERSION} QUIET)
+
+if (NOT fmt_FOUND)
+
+    FetchContent_Declare(
+        fmt
+        GIT_REPOSITORY https://github.com/fmtlib/fmt
+        GIT_TAG        ${NEEDED_fmt_VERSION}
+        GIT_SHALLOW    TRUE
+    )
+
+    FetchContent_MakeAvailable(fmt)
+
+endif()
+
 add_subdirectory(include)
 
 if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)

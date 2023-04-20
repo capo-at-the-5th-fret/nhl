@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <format>
+#include <fmt/format.h>
 #include "nhl/lottery/lottery.h"
 
 namespace nhl::lottery
@@ -223,9 +223,9 @@ namespace nhl::lottery
 }
 
 template <>
-struct std::formatter<nhl::lottery::round_number> : std::formatter<int>
+struct fmt::formatter<nhl::lottery::round_number> : fmt::formatter<int>
 {
-    auto format(nhl::lottery::round_number const& n, std::format_context& ctx)
+    auto format(nhl::lottery::round_number const& n, fmt::format_context& ctx)
     {
         return formatter<int>::format(static_cast<int>(n), ctx);
     }

@@ -3,10 +3,10 @@
 #include <cstdint>
 #include <compare>
 #include <iostream>
-#include <format>
 #include <algorithm>
 #include <numeric>
 #include <ranges>
+#include <fmt/format.h>
 #include "nhl/lottery/lottery.h"
 
 namespace nhl::lottery
@@ -74,10 +74,10 @@ namespace nhl::lottery
 }
 
 template <>
-struct std::formatter<nhl::lottery::ball> : std::formatter<int>
+struct fmt::formatter<nhl::lottery::ball> : fmt::formatter<int>
 {
-    auto format(nhl::lottery::ball const& b, std::format_context& ctx) const
+    auto format(nhl::lottery::ball const& b, fmt::format_context& ctx) const
     {
-        return std::formatter<int>::format(static_cast<int>(b), ctx);
+        return fmt::formatter<int>::format(static_cast<int>(b), ctx);
     }
 };
