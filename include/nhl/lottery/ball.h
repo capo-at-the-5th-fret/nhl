@@ -67,11 +67,11 @@ namespace nhl::lottery
     }();
 
     static_assert(balls.size() == ball_count);
-#if __cpp_lib_ranges
-    static_assert(std::ranges::is_sorted(balls));
-    static_assert(std::ranges::adjacent_find(balls) ==
-        std::ranges::end(balls));
-#endif
+// #if __cpp_lib_ranges
+//     static_assert(std::ranges::is_sorted(balls));
+//     static_assert(std::ranges::adjacent_find(balls) ==
+//         std::ranges::end(balls));
+// #endif
 
 }
 

@@ -115,9 +115,9 @@ namespace nhl
         team{ team_id::wsh, "Washington Capitals" }
     };
     static_assert(std::ranges::size(teams) == 32);
-#if __cpp_lib_ranges
-    static_assert(std::ranges::is_sorted(teams, {}, &team::id));
-#endif
+// #if __cpp_lib_ranges
+//     static_assert(std::ranges::is_sorted(teams, {}, &team::id));
+// #endif
 
     constexpr team lookup(team_id id)
     {

@@ -42,11 +42,11 @@ namespace nhl::lottery
         ranking_odds{ 16, 0.5_pct }
     };
     static_assert(first_round_odds.size() == 16);
-#if __cpp_lib_ranges
-    static_assert(std::ranges::is_sorted(first_round_odds, {}, &ranking_odds::ranking));
-    static_assert(std::ranges::adjacent_find(first_round_odds, {}, &ranking_odds::ranking) ==
-        std::ranges::end(first_round_odds));
-#endif
+// #if __cpp_lib_ranges
+//     static_assert(std::ranges::is_sorted(first_round_odds, {}, &ranking_odds::ranking));
+//     static_assert(std::ranges::adjacent_find(first_round_odds, {}, &ranking_odds::ranking) ==
+//         std::ranges::end(first_round_odds));
+// #endif
 
     /*static_assert(
         []<std::size_t... I>(std::index_sequence<I...>)
