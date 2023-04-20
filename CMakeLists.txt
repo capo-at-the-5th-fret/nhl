@@ -5,6 +5,8 @@ project(nhl
     LANGUAGES CXX
 )
 
+include(FetchContent)
+
 # Tags: https://github.com/fmtlib/fmt/tags
 # Linkage: target_link_libraries(fmt::fmt)
 set(NEEDED_fmt_VERSION "9.1.0")
