@@ -53,7 +53,8 @@ namespace nhl::lottery
             pos->combinations : 0;
     }
 
-    inline constexpr std::array<int, combinations_used_count>
+    // NOTE: Can't be constexpr due to std::random_device
+    inline std::array<int, combinations_used_count>
         ranking_combination_distribution(bool shuffle = true)
     {
         std::array<int, combinations_used_count> ret;
