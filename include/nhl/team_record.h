@@ -1,6 +1,6 @@
 #pragma once
 
-#include <format>
+#include <fmt/format.h>
 #include "team.h"
 
 namespace nhl
@@ -22,7 +22,7 @@ namespace nhl
 
     inline std::ostream& operator<<(std::ostream& os, team_record const& r)
     {
-        auto s = std::format(
+        auto s = fmt::format(
             "{:^3} {:^3} {:^3} {:^3} {:^3} {:^3} {:^3} {:^3} {:^3} {:^3} {:^3}",
             to_string(r.id),
             r.games_played,
