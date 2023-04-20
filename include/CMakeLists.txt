@@ -53,4 +53,4 @@ target_sources(nhl
 )
 
 target_compile_features(nhl INTERFACE cxx_std_23)
-target_link_libraries(nhl INTERFACE fmt::fmt)
+target_link_libraries(nhl INTERFACE $<BUILD_INTERFACE:fmt::fmt-header-only>)
