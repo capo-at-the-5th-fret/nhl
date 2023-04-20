@@ -1,5 +1,6 @@
 #pragma once
 
+#include <optional>
 #include <ranges>
 #include "nhl/print.h"
 #include "nhl/lottery/lottery.h"
