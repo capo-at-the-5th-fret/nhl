@@ -234,7 +234,8 @@ namespace nhl::lottery
     inline constexpr std::array rankings = []()
     {
         std::array<int, rankings_count> ret;
-        std::ranges::iota(ret, 1);
+        //std::ranges::iota(ret, 1);
+        std::iota(ret.begin(), ret.end(), 1);
         return ret;
     }();
     static_assert(rankings.size() == rankings_count);
