@@ -1,0 +1,123 @@
+struct team
+{
+    team_id id;
+    std::string_view name;
+};
+
+inline constexpr std::array teams
+{
+    team{ ANA, "Anaheim Ducks" },
+    team{ ARI, "Arizona Coyotes" },
+    team{ BOS, "Boston Bruins" },
+    team{ BUF, "Buffalo Sabres" },
+    team{ CAR, "Carolina Hurricanes" },
+    team{ CBJ, "Columbus Blue Jackets" },
+    team{ CGY, "Calgary Flames" },
+    team{ CHI, "Chicago Blackhawks" },
+    team{ COL, "Colorado Avalanche" },
+    team{ DAL, "Dallas Stars" },
+    team{ DET, "Detroit Red Wings" },
+    team{ EDM, "Edmonton Oilers" },
+    team{ FLA, "Florida Panthers" },
+    team{ LAK, "Los Angeles Kings" },
+    team{ MIN, "Minnesota Wild" },
+    team{ MTL, "Montreal Canadiens" },
+    team{ NJD, "New Jersey Devils" },
+    team{ NSH, "Nashville Predators" },
+    team{ NYI, "New York Islanders" },
+    team{ NYR, "New York Rangers" },
+    team{ OTT, "Ottawa Senators" },
+    team{ PHI, "Philadelphia Flyers" },
+    team{ PIT, "Pittsburgh Penguins" },
+    team{ SEA, "Seattle Kraken" },
+    team{ SJS, "San Jose Sharks" },
+    team{ STL, "St. Louis Blues" },
+    team{ TBL, "Tampa Bay Lightning" },
+    team{ TOR, "Toronto Maple Leafs" },
+    team{ VAN, "Vancouver Canucks" },
+    team{ VGK, "Vegas Golden Knights" },
+    team{ WPG, "Winnipeg Jets" },
+    team{ WSH, "Washington Capitals" }
+};
+static_assert(std::ranges::size(teams) == 32);
+static_assert(std::ranges::is_sorted(teams, {}, &team::id));
+
+#pragma once
+
+#include <iostream>
+#include "nhl/text_literals.h"
+
+namespace nhl
+{
+    enum class team_id
+    {
+        ana,
+        ari,
+        bos,
+        buf,
+        car,
+        cbj,
+        cgy,
+        chi,
+        col,
+        dal,
+        det,
+        edm,
+        fla,
+        lak,
+        min,
+        mtl,
+        njd,
+        nsh,
+        nyi,
+        nyr,
+        ott,
+        phi,
+        pit,
+        sea,
+        sjs,
+        stl,
+        tbl,
+        tor,
+        van,
+        vgk,
+        wpg,
+        wsh
+    };
+
+    struct team_id_values
+    {
+        static constexpr bool ok(team_id id) noexcept
+        {
+            return id >= (min)() && id <= (max)();
+        }
+
+        static constexpr team_id (min)() noexcept
+        {
+            return team_id::ana;
+        }
+
+        static constexpr team_id (max)() noexcept
+        {
+            return team_id::wsh;
+        }
+    };
+
+    inline constexpr std::string_view to_string(team_id id) noexcept
+    {
+        return team_id_values::ok(id) ?
+            text_literals::team_ids[static_cast<std::size_t>(id)] :
+            nhl::text_literals::unknown;
+    }
+
+    inline std::ostream& operator<<(std::ostream& os, team_id id)
+    {
+        os << to_string(id);
+        return os;
+    }
+
+    namespace team_ids
+    {
+        using enum team_id;
+    }
+}
