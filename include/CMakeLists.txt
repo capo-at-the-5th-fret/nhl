@@ -1,3 +1,24 @@
+include(FetchContent)
+
+# Tags: https://github.com/fmtlib/fmt/tags
+# Linkage: target_link_libraries(fmt::fmt)
+set(NEEDED_fmt_VERSION "9.1.0")
+
+find_package(fmt ${NEEDED_fmt_VERSION} QUIET)
+
+if (NOT fmt_FOUND)
+
+    FetchContent_Declare(
+        fmt
+        GIT_REPOSITORY https://github.com/fmtlib/fmt
+        GIT_TAG        ${NEEDED_fmt_VERSION}
+        GIT_SHALLOW    TRUE
+    )
+
+    FetchContent_MakeAvailable(fmt)
+
+endif()
+
 add_library(nhl INTERFACE)
 add_library(nhl::nhl ALIAS nhl)
 
