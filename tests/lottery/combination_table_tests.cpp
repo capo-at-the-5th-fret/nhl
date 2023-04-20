@@ -8,5 +8,5 @@ TEST_CASE("combination_table")
     combination_table ct;
     ct.populate();
 
-    nhl::lottery::print_combination_table(ct);
+    //nhl::lottery::print_combination_table(ct);
 }
