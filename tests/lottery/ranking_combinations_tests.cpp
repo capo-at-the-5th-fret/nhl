@@ -68,14 +68,20 @@ TEST_CASE("ranking_combination_distribution")
         bool shuffle{ true };
         const auto dist = ranking_combination_distribution(shuffle);
 
-        REQUIRE_FALSE(std::ranges::is_sorted(dist));
+        REQUIRE_FALSE(std::is_sorted(dist.begin(), dist.end()));
+        //REQUIRE_FALSE(std::ranges::is_sorted(dist));
 
         for (auto const& ranking : nhl::lottery::rankings)
         {
-            const auto c = std::ranges::count_if(dist, [&ranking](auto const& r)
-            {
-                return r == ranking;
-            });
+            const auto c = std::count_if(dist.begin(), dist.end(),
+                [&ranking](auto const& r)
+                {
+                    return r == ranking;
+                });
+            // const auto c = std::ranges::count_if(dist, [&ranking](auto const& r)
+            // {
+            //     return r == ranking;
+            // });
 
             REQUIRE(c == nhl::lottery::combinations_for_ranking(ranking));
         }
@@ -86,14 +92,20 @@ TEST_CASE("ranking_combination_distribution")
         bool shuffle{ false };
         const auto dist = ranking_combination_distribution(shuffle);
 
-        REQUIRE(std::ranges::is_sorted(dist));
+        REQUIRE(std::is_sorted(dist.begin(), dist.end()));
+        //REQUIRE(std::ranges::is_sorted(dist));
 
         for (auto const& ranking : nhl::lottery::rankings)
         {
-            const auto c = std::ranges::count_if(dist, [&ranking](auto const& r)
-            {
-                return r == ranking;
-            });
+            const auto c = std::count_if(dist.begin(), dist.end(),
+                [&ranking](auto const& r)
+                {
+                    return r == ranking;
+                });
+            // const auto c = std::ranges::count_if(dist, [&ranking](auto const& r)
+            // {
+            //     return r == ranking;
+            // });
 
             REQUIRE(c == nhl::lottery::combinations_for_ranking(ranking));
         }
