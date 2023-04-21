@@ -93,7 +93,7 @@ namespace math
 
             f(combo);
 
-        } while (std::ranges::prev_permutation(mask).found);
-
+        } while (std::prev_permutation(mask.begin(), mask.end()));
+        //} while (std::ranges::prev_permutation(mask).found);
     }
 }

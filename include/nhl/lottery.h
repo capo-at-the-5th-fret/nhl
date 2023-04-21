@@ -44,9 +44,9 @@ namespace nhl
         ranking_odds{ 17, 0.1 }
     };
     static_assert(lottery_odds.size() == 17);
-// #if __cpp_lib_ranges
-//     static_assert(std::ranges::is_sorted(lottery_odds, {}, &ranking_odds::rank));
-// #endif
+#if __cpp_lib_ranges
+    static_assert(std::ranges::is_sorted(lottery_odds, {}, &ranking_odds::rank));
+#endif
 
     double get_ranking_odds(int ranking)
     {

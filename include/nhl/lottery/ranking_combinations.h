@@ -93,7 +93,8 @@ namespace nhl::lottery
 
         if (shuffle)
         {
-            std::ranges::shuffle(ret, gen);
+            std::shuffle(ret.begin(), ret.end(), gen);
+            //std::ranges::shuffle(ret, gen);
         }
 
         return ret;
