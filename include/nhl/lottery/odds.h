@@ -59,10 +59,18 @@ namespace nhl::lottery
 
     inline constexpr math::percentage first_round_odds_for_ranking(int ranking)
     {
-        auto pos = std::ranges::find(first_round_odds, ranking,
-            &ranking_odds::ranking);
-        return (pos != std::ranges::end(first_round_odds)) ? pos->odds :
+        auto pos = std::find_if(first_round_odds.begin(), first_round_odds.end(),
+            [ranking](auto const& ro)
+            {
+                return ro.ranking == ranking;
+            });
+        return (pos != first_round_odds.end()) ? pos->odds :
             math::percentage{ 0 };
+
+        // auto pos = std::ranges::find(first_round_odds, ranking,
+        //     &ranking_odds::ranking);
+        // return (pos != std::ranges::end(first_round_odds)) ? pos->odds :
+        //     math::percentage{ 0 };
     }
 
 
