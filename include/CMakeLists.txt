@@ -30,7 +30,7 @@ target_sources(nhl
             nhl/division.h
             nhl/game.h
             nhl/league.h
-            nhl/lottery.h
+            nhl/print.h
             nhl/schedule.h
             nhl/standings.h
             nhl/team_record.h
@@ -38,18 +38,22 @@ target_sources(nhl
             nhl/text_literals.h
 
             nhl/lottery/ball.h
-            nhl/lottery/combination.h
             nhl/lottery/combination_table.h
             nhl/lottery/combination_value.h
+            nhl/lottery/combination.h
             nhl/lottery/lottery.h
             nhl/lottery/machine.h
             nhl/lottery/odds.h
             nhl/lottery/print.h
-            nhl/lottery/ranking.h
             nhl/lottery/ranking_combinations.h
+            nhl/lottery/ranking.h
+            nhl/lottery/round.h
             nhl/lottery/stats.h
             nhl/lottery/team.h
             nhl/lottery/teams.h
+
+            math/cmath.h
+            math/percentage.h
 )
 
 target_compile_features(nhl INTERFACE cxx_std_23)
