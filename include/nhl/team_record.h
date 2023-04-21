@@ -41,3 +41,25 @@ namespace nhl
         return os;
     }
 }
+
+template <>
+struct fmt::formatter<nhl::team_record> : fmt::formatter<std::string>
+{
+    auto format(nhl::team_record const& r, fmt::format_context& ctx)
+    {
+        return formatter<std::string>::format(
+            fmt::format("{:^3} {:^3} {:^3} {:^3} {:^3} {:^3} {:^3} {:^3} {:^3} {:^3} {:^3}",
+                to_string(r.id),
+                r.games_played,
+                r.wins,
+                r.losses,
+                r.overtime_losses,
+                r.regulation_wins,
+                r.regulation_or_overtime_wins,
+                r.shootout_wins,
+                r.shootout_losses,
+                r.goals_for,
+                r.goals_against),
+            ctx);
+    }
+};
