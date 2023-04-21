@@ -34,19 +34,19 @@ namespace nhl::lottery
         ranking_combinations{ 16, 5 }
     };
     static_assert(combinations_per_ranking.size() == rankings_count);
-// #if __cpp_lib_ranges
-//     static_assert(std::ranges::is_sorted(combinations_per_ranking, {},
-//         &ranking_combinations::ranking));
-//     static_assert(std::ranges::adjacent_find(combinations_per_ranking, {},
-//         &ranking_combinations::ranking) == std::ranges::end(combinations_per_ranking));
-//     static_assert
-//     (
-//         []<std::size_t... I>(std::index_sequence<I...>)
-//         {
-//             return (... + combinations_per_ranking[I].combinations);
-//         }(std::make_index_sequence<rankings_count>{}) == combinations_used_count
-//     );
-// #endif
+#if __cpp_lib_ranges
+    static_assert(std::ranges::is_sorted(combinations_per_ranking, {},
+        &ranking_combinations::ranking));
+    static_assert(std::ranges::adjacent_find(combinations_per_ranking, {},
+        &ranking_combinations::ranking) == std::ranges::end(combinations_per_ranking));
+    static_assert
+    (
+        []<std::size_t... I>(std::index_sequence<I...>)
+        {
+            return (... + combinations_per_ranking[I].combinations);
+        }(std::make_index_sequence<rankings_count>{}) == combinations_used_count
+    );
+#endif
 
     inline constexpr std::size_t combinations_for_ranking(int ranking)
     {
