@@ -53,6 +53,7 @@ TEST_CASE("team_id")
     using underlying_t = std::underlying_type_t<team_id>;
     static_assert(std::is_same_v<underlying_t, int>);
 
+#if __cpp_lib_to_underlying
     static_assert(std::to_underlying(ana) == 0);
     static_assert(std::to_underlying(ari) == 1);
     static_assert(std::to_underlying(bos) == 2);
@@ -85,7 +86,7 @@ TEST_CASE("team_id")
     static_assert(std::to_underlying(vgk) == 29);
     static_assert(std::to_underlying(wpg) == 30);
     static_assert(std::to_underlying(wsh) == 31);
-
+#endif
     SUBCASE("to_string")
     {
         static_assert(to_string(ana) == "ANA");
