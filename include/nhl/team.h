@@ -114,18 +114,40 @@ namespace nhl
         team{ team_id::wpg, "Winnipeg Jets" },
         team{ team_id::wsh, "Washington Capitals" }
     };
-    static_assert(std::ranges::size(teams) == 32);
+    static_assert(teams.size() == 32);
 // #if __cpp_lib_ranges
 //     static_assert(std::ranges::is_sorted(teams, {}, &team::id));
 // #endif
 
     constexpr team lookup(team_id id)
     {
-        if (auto pos = std::ranges::lower_bound(teams, id, {}, &team::id);
-            pos != std::ranges::end(teams) && pos->id == id)
+        struct teams_sort_by_team_id
+        {
+            bool operator()(const team& lhs, const team& rhs) const
+            {
+                return lhs.id < rhs.id;
+            }
+            bool operator()(const team& lhs, const team_id& rhs) const
+            {
+                return lhs.id < rhs;
+            }
+            bool operator()(const team_id& lhs, const team& rhs) const
+            {
+                return lhs < rhs.id;
+            }
+        };
+
+        if (auto pos = std::lower_bound(teams.begin(), teams.end(), id,
+            teams_sort_by_team_id{}); pos != teams.end() && pos->id == id)
         {
             return *pos;
         }
+
+        // if (auto pos = std::ranges::lower_bound(teams, id, {}, &team::id);
+        //     pos != std::ranges::end(teams) && pos->id == id)
+        // {
+        //     return *pos;
+        // }
 
         throw std::out_of_range("Invalid team id");
     }
